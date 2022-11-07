@@ -39,7 +39,6 @@ export const loginUser = (email, password) => {
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      console.log("login giriş");
     })
     .catch((error) => {
       console.log(error);
