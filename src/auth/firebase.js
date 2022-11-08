@@ -10,7 +10,14 @@ import {
   signOut,
 } from "firebase/auth";
 
-import { firebaseConfig } from "./firebase.config";
+const firebaseConfig = {
+  apiKey: process.env.REACT_APP_GOOGLE_APIKEY,
+  authDomain: process.env.REACT_APP_GOOGLE_AUTHDOMAIN,
+  projectId: process.env.REACT_APP_GOOGLE_PROJECTID,
+  storageBucket: process.env.REACT_APP_GOOGLE_STORAGEBUCKET,
+  messagingSenderId: process.env.REACT_APP_GOOGLE_SENDERID,
+  appId: process.env.REACT_APP_GOOGLE_APIID,
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
