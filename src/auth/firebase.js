@@ -11,12 +11,12 @@ import {
 } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDvu3QagRUwuPBBTVjF3NjHmUPKFqEinro",
-  authDomain: "movie-app-e0047.firebaseapp.com",
-  projectId: "movie-app-e0047",
-  storageBucket: "movie-app-e0047.appspot.com",
-  messagingSenderId: "1014187925074",
-  appId: "1:1014187925074:web:1571dd6e9cfdc0cdc8898b",
+  apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
+  authDomain: process.env.REACT_APP_GOOGLE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_GOOGLE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_GOOGLE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_GOOGLE_SENDER_ID,
+  appId: process.env.REACT_APP_GOOGLE_API_ID,
 };
 
 // Initialize Firebase
@@ -34,13 +34,15 @@ export const createUser = (email, password) => {
     });
 };
 
-export const loginUser = (email, password) => {
+export const loginUser = (email, password, setError) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
+      setError(false);
     })
     .catch((error) => {
+      setError(true);
       console.log(error);
     });
 };
@@ -62,10 +64,7 @@ export const loginWithGoogle = () => {
 
 export const loginOut = () => {
   signOut(auth)
-    .then(() => {
-      //console.log("çıkış yapıldı");
-      //console.log(auth.currentUser);
-    })
+    .then(() => {})
     .catch((error) => {
       // An error happened.
     });
@@ -73,7 +72,7 @@ export const loginOut = () => {
 export const loginControl = (setCurrentUser) => {
   onAuthStateChanged(auth, (currentUser) => {
     if (currentUser) {
-      setCurrentUser(currentUser); // hiçbirşeye ihtiyacı yok sadece çalıştır ve aktif kullanıcı bilgilerini al
+      setCurrentUser(currentUser);
     } else {
       // User is signed out
       setCurrentUser(false);
@@ -81,10 +80,11 @@ export const loginControl = (setCurrentUser) => {
   });
 };
 
-export const passwordReset = (email) => {
+export const passwordReset = (email, setAlert) => {
   sendPasswordResetEmail(auth, email)
     .then(() => {
       // Password reset email sent!
+      setAlert(true);
     })
     .catch((error) => {
       const errorMessage = error.message;
