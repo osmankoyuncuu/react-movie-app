@@ -10,7 +10,7 @@ import Footer from "../component/Footer";
 const AppRouter = () => {
   return (
     <>
-      <BrowserRouter basename="/">
+      <BrowserRouter>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -19,7 +19,6 @@ const AppRouter = () => {
           <Route path="detail" element={<PrivateRouter />}>
             <Route path="" element={<MovieDetail />} />
           </Route>
-          <Route path="*" element={<Home />} />
         </Routes>
         <Footer />
       </BrowserRouter>
