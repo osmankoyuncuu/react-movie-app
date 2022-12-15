@@ -1,5 +1,3 @@
-## Check The Live Website ➡️ [Live Website]()
-
 ## Animation of the Website
 
 ![image](./movie-app.gif)
